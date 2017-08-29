@@ -13,10 +13,10 @@ This is by no means finished, but it is (currently) working as a clock and bedsi
 ## To Do list: 
 #### Learn to program.
 #### Fix the random the "i"'s that appear after lines. (cut?)
-#### scrap the script for one that builds a png in imagemagik and uploads it, found a script for this, but images dont display right.
-#### cache weather as i really dont need to pull that every hour. 
-#### streemline the weather pull, itemize it. 
-#### rearange items and change the size of the text. 
+#### Scrap the script for one that builds a png in imagemagik and uploads it, found a script for this, but images dont display right.
+#### Cache weather as i really dont need to pull that every hour. 
+#### Streemline the weather pull, itemize it. 
+#### Rearange items and change the size of the text. 
 
 ---
 
@@ -27,6 +27,6 @@ This is by no means finished, but it is (currently) working as a clock and bedsi
 ---
 
 ## Known issues:
-#### cant seem to choose a bigger size of text other than "16" could get around this by building some kind of assci art. 
+#### Cant seem to choose a bigger size of text other than "16" could get around this by building some kind of assci art. 
 
 ---
