@@ -14,55 +14,46 @@ device = 0
  	
 disp = EPD_driver.EPD_driver(spi=SPI.SpiDev(bus, device))
 
-
 # stats are gathered at the top because you dont have to wait for the screen to refresh to find out your code sucks
 print '---- start gathereing some stats -------'
 
   # Shell scripts for system monitoring from here : https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
 cmd = "hostname -I | cut -d\' \' -f1"
 IP = subprocess.check_output(cmd, shell = True )
-cmd = "top -bn1 | grep load | awk '{printf \"CPU Load: %.2f\", $(NF-2)}'"
+cmd = "w |head -n1|awk '{print $6,$8,$2,$3}'"
 CPU = subprocess.check_output(cmd, shell = True )
 cmd = "free -m | awk 'NR==2{printf \"Mem: %s/%sMB %.2f%%\", $3,$2,$3*100/$2 }'"
 MemUsage = subprocess.check_output(cmd, shell = True )
 cmd = "df -h | awk '$NF==\"/\"{printf \"Disk: %d/%dGB %s\", $3,$2,$5}'"
 Disk = subprocess.check_output(cmd, shell = True )
-cmd = "curl -s wttr.in/sydney?0?T |tail -n5 |xargs | sed -e 's/ //g'|sed 's/[^a-zA-Z0-9]/ /g'"
+# OLD weather cmd = "curl -s wttr.in/?0?T |tail -n5 |xargs | sed -e 's/ //g'|sed 's/[^a-zA-Z0-9]/ /g'"
+# old, cleaned it up a lot. cmd = "curl -s wttr.in/?0?T |tail -n5 |xargs | sed -e 's/ //g'|sed 's/[^a-zA-Z0-9]/ /g' | tr -s ' '"
+cmd = "curl -s wttr.in/?0?T |tail -n5 |xargs | sed -e 's/ //g'|sed 's/[^a-zA-Z0-9]/ /g' | tr -s ' ' |awk '{print $1,$2,$3,$4$5,$7}'"
 Weather = subprocess.check_output(cmd, shell = True )
 cmd = "date|cut -c-26"
 Date = subprocess.check_output(cmd, shell = True)
     
-    #weather cmd curl -s wttr.in/sydney?0 |tail -n5| awk '{ print $4$5$6 }' |xargs | sed -e 's/ / /g'
-    #works curl -s wttr.in/sydney?0?T |tail -n5 |xargs | sed -e 's/ //g'|sed 's/[^a-zA-Z0-9]/ /g'
-    #curl -s wttr.in/sydney?0?T |tail -n5 |xargs | sed -e 's/ //g'|sed 's/[^a-zA-Z0-9]/ /g'|awk '{print $1,$2\"-\"$3,$4,$5$6,"winds",$8$9" rainfall"}'
-#test prints 
-
-    # Write two lines of text.
-
-    #draw.text((x, top),       "IP: " + str(IP),  font=font, fill=255)
-    #draw.text((x, top+8),     str(CPU), font=font, fill=255)
-    #draw.text((x, top+16),    str(MemUsage),  font=font, fill=255)
-    #draw.text((x, top+25),    str(Disk),  font=font, fill=255)
-
     
-#####dont remove BOTH clears or for some reason it just never displays.
+#print str(Weather)    this was just here to check the format of the weather, 
+
+##### so, if you dont do the full clear it works fine! but gets a touch ghosty
+####### if you remove the Dis_Clear_part(), everything stops working #quality 
 #init and Clear full screen
-print '------------init and Clear full screen------------'
-disp.Dis_Clear_full()
+#print '------------init and Clear full screen------------'
+#disp.Dis_Clear_full()
 #init and Clear part screen  
-print '------------init and Clear part screen------------'
+#print '------------init and Clear part screen------------'
 disp.Dis_Clear_part()
 ######dont remove the above clears!!! 
 
 #String Font size range seems to be from 12 to 16.. for some reason
+#going bottom to top, because im lazy
 print '------------Show string------------'
-disp.Dis_String(0, 0, "IP: " + str(IP),16) 
-disp.Dis_String(0, 20, str(CPU),16)
-disp.Dis_String(0, 36, str(MemUsage),16)
-disp.Dis_String(0, 52, str(Disk),16)
-disp.Dis_String(0, 68, "Weather in Sydney:",16)
-disp.Dis_String(0, 84, str(Weather),12)
-disp.Dis_String(0, 96, str(Date),16)
+disp.Dis_String(0, 1, str(Date),16)
+disp.Dis_String(0, 20, "Current weather:",16)
+disp.Dis_String(0, 35, str(Weather),16)
+disp.Dis_String(0, 102, str(CPU) + " " + str(Disk),12)
+disp.Dis_String(0, 114, "IP:" + str(IP) + " " + str(MemUsage),12) 
 
 #time.sleep(DELAYTIME)
 
