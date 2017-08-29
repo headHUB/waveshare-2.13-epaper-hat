@@ -6,7 +6,10 @@ So I cheaped out and bought the waveshare 2.13" epaper / eink hat for the Raspbe
 This was not a great idea and the screen is almost as immiture as I am and its a pain to get working, 
 
 I have uploaded my code incase someone else has bought this screen and needs help, its not good code but it should point you in the right direction.
-This is by no means finished, but it is (currently) working as a clock and bedside weather info.
+This is by no means finished, but it is (currently) working as a clock and bedside weather info.(most of the time) 
+
+To install and setup the drivers, follow the guide on the wave share wiki.
+This is a work in progress, below is my notes.
 
 ---
 
