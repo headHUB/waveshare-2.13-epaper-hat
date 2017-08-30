@@ -6,6 +6,8 @@
 # Some images it doesnt convert and crashes out, not sure why. 
 # code is based off: https://gist.github.com/Akkiesoft/af7470d6f4efec1ddf92d9b531646009 
 # code to upoad to a screen is here: https://gist.github.com/Akkiesoft/f3ba94af42138a3756bac426982f57d9
+# would prefer to replace this with an ImageMagick line, but no luck yet.
+# images generated with ImageMagick seem to display nicely, thats about it 
 #
 #############################
 import os
